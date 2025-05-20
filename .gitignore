@@ -1,24 +1,634 @@
-# Compiled class file
-*.class
-
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Text-Focused Website</title>
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        /* Navigation */
+        nav {
+            margin-bottom: 20px;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        nav ul li {
+            margin-right: 20px;
+            margin-bottom: 10px;
+        }
+        
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav ul li a:hover, 
+        nav ul li a.active {
+            background-color: #3498db;
+        }
+        
+        /* Main Content */
+        main {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin: 25px 0 15px;
+            color: #2c3e50;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            margin: 20px 0 10px;
+            color: #2c3e50;
+        }
+        
+        p {
+            margin-bottom: 20px;
+        }
+        
+        .content-section {
+            margin-bottom: 30px;
+        }
+        
+        /* Subtle accent for text sections */
+        .text-accent {
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+            margin: 25px 0;
+        }
+        
+        /* Image styles */
+        .img-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .img-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .img-caption {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-links {
+            margin: 15px 0;
+        }
+        
+        .footer-links a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin-bottom: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Button Style */
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        /* List Styles */
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        /* Contact form styles */
+        .contact-form {
+            margin-top: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+        }
+        
+        /* Pages styles */
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">SimpleText</div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="about">About</a></li>
+                    <li><a href="#" class="nav-link" data-page="services">Services</a></li>
+                    <li><a href="#" class="nav-link" data-page="blog">Blog</a></li>
+                    <li><a href="#" class="nav-link" data-page="gallery">Gallery</a></li>
+                    <li><a href="#" class="nav-link" data-page="faq">FAQ</a></li>
+                    <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <main>
+            <!-- Home Page -->
+            <div class="page active" id="home">
+                <h1>Welcome to SimpleText</h1>
+                <div class="content-section">
+                    <p>SimpleText is a text-focused website that prioritizes clear communication and readability. We believe that well-crafted text is the foundation of any effective website, and we're committed to showcasing the power of words.</p>
+                    
+                    <div class="text-accent">
+                        <p>Our site is designed with simplicity and accessibility in mind, with minimal use of images and a focus on content that matters.</p>
+                    </div>
+                    
+                    <h2>Our Philosophy</h2>
+                    <p>In a world of flashy designs and overwhelming imagery, SimpleText stands out by embracing the core principle that content is king. We focus on creating valuable, well-structured text that communicates effectively.</p>
+                    
+                    <div class="img-container">
+                        <img src="/api/placeholder/600/300" alt="Text-focused design concept">
+                        <div class="img-caption">A minimalist approach to web design that emphasizes content</div>
+                    </div>
+                    
+                    <h2>What We Offer</h2>
+                    <p>From thoughtful articles to comprehensive services, SimpleText provides value through words. Our clean design ensures that the message is never lost in unnecessary visual clutter.</p>
+                    
+                    <p>Browse through our pages to learn more about who we are and what we do. Each section is carefully crafted to provide you with the information you need in a clear, straightforward manner.</p>
+                    
+                    <a href="#" class="btn" data-page="services">Explore Our Services</a>
+                </div>
+            </div>
+            
+            <!-- About Page -->
+            <div class="page" id="about">
+                <h1>About Us</h1>
+                <div class="content-section">
+                    <p>SimpleText was founded in 2023 with a clear mission: to demonstrate that well-crafted text can be more powerful than elaborate visual designs. Our team consists of writers, content strategists, and minimalist designers who believe in the power of words.</p>
+                    
+                    <h2>Our Story</h2>
+                    <p>The idea for SimpleText came about when our founder noticed a trend in web design that prioritized flashy visuals over substantive content. Believing that this approach often diluted the message, they set out to create a platform that would showcase the strength of well-crafted text.</p>
+                    
+                    <div class="text-accent">
+                        <p>We believe that in the digital age, clear and concise communication is more valuable than ever.</p>
+                    </div>
+                    
+                    <h2>Our Team</h2>
+                    <p>Our team brings together expertise in content creation, UX writing, and minimalist design. We're united by a shared passion for effective communication and a belief that less is often more when it comes to web design.</p>
+                    
+                    <div class="img-container">
+                        <img src="/api/placeholder/600/300" alt="The SimpleText team">
+                        <div class="img-caption">Our dedicated team of content and design specialists</div>
+                    </div>
+                    
+                    <h2>Our Values</h2>
+                    <ul>
+                        <li><strong>Clarity:</strong> We prioritize clear communication over complex design.</li>
+                        <li><strong>Accessibility:</strong> Our content is designed to be accessible to all users.</li>
+                        <li><strong>Quality:</strong> We believe in the power of well-crafted words.</li>
+                        <li><strong>Simplicity:</strong> We embrace minimalism in our approach to design.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Services Page -->
+            <div class="page" id="services">
+                <h1>Our Services</h1>
+                <div class="content-section">
+                    <p>SimpleText offers a range of services focused on content creation and text-centric design. Our approach emphasizes clarity, readability, and effective communication.</p>
+                    
+                    <h2>Content Strategy</h2>
+                    <p>We help organizations develop comprehensive content strategies that align with their goals and resonate with their target audience. Our strategic approach ensures that every piece of content serves a purpose and contributes to the overall narrative.</p>
+                    
+                    <h2>Copywriting</h2>
+                    <p>Our team of experienced writers creates compelling copy for websites, marketing materials, and digital platforms. We focus on crafting messages that are clear, persuasive, and aligned with your brand voice.</p>
+                    
+                    <div class="text-accent">
+                        <p>Great copy doesn't just inform—it engages, persuades, and inspires action.</p>
+                    </div>
+                    
+                    <h2>UX Writing</h2>
+                    <p>From interface text to error messages, our UX writers ensure that every word in your digital product enhances the user experience. We create microcopy that guides users, reduces friction, and builds trust.</p>
+                    
+                    <h2>Minimalist Web Design</h2>
+                    <p>Our design approach prioritizes content over visual complexity. We create websites that are clean, intuitive, and focused on delivering your message effectively.</p>
+                    
+                    <div class="img-container">
+                        <img src="/api/placeholder/600/300" alt="Minimalist web design example">
+                        <div class="img-caption">An example of our content-focused design approach</div>
+                    </div>
+                    
+                    <h2>Content Audits</h2>
+                    <p>We review your existing content to identify strengths, weaknesses, and opportunities for improvement. Our comprehensive audits provide actionable insights and recommendations for enhancing your content strategy.</p>
+                </div>
+            </div>
+            
+            <!-- Blog Page -->
+            <div class="page" id="blog">
+                <h1>Blog</h1>
+                <div class="content-section">
+                    <div class="blog-post">
+                        <h2>The Power of Simplicity in Web Design</h2>
+                        <p class="post-meta">Published on May 15, 2025 • Written by Alex Chen</p>
+                        <p>In an era of increasingly complex web designs, there's something refreshing about websites that embrace simplicity. Minimalist design isn't just an aesthetic choice—it's a functional one that puts user experience at the forefront.</p>
+                        <p>Studies have shown that websites with simpler designs have lower bounce rates and higher conversion rates. This is because users can quickly find what they're looking for without being distracted by unnecessary elements.</p>
+                        <div class="text-accent">
+                            <p>Simplicity isn't about lacking features—it's about presenting them in a way that feels intuitive and uncluttered.</p>
+                        </div>
+                        <p>The key to effective minimalist design is thoughtful reduction. Rather than starting with a blank slate and adding elements, consider starting with a complete design and removing anything that doesn't serve a clear purpose.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                    
+                    <div class="blog-post">
+                        <h2>Why Typography Matters More Than You Think</h2>
+                        <p class="post-meta">Published on May 3, 2025 • Written by Sam Taylor</p>
+                        <p>Typography is often overlooked in web design discussions, but it plays a crucial role in how users perceive and interact with content. The right typeface can establish tone, enhance readability, and strengthen brand identity.</p>
+                        <p>When selecting typography for a text-focused website, consider factors like readability at different sizes, character distinction, and how the typeface performs across various devices and browsers.</p>
+                        <div class="img-container">
+                            <img src="/api/placeholder/600/300" alt="Typography examples">
+                            <div class="img-caption">Different typefaces convey different moods and personalities</div>
+                        </div>
+                        <p>Remember that typography isn't just about choosing a font—it's about the entire system of how text is arranged on a page. Line height, letter spacing, and paragraph width all contribute to the overall reading experience.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                    
+                    <div class="blog-post">
+                        <h2>Content-First Design: A New Approach</h2>
+                        <p class="post-meta">Published on April 22, 2025 • Written by Jordan Lee</p>
+                        <p>Traditional web design often starts with layouts and visuals, with content added as an afterthought. Content-first design flips this approach, beginning with the core message and building the design around it.</p>
+                        <p>This approach ensures that design serves content, rather than forcing content to fit into predetermined design structures. The result is websites where form and function work together harmoniously.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Gallery Page -->
+            <div class="page" id="gallery">
+                <h1>Gallery</h1>
+                <div class="content-section">
+                    <p>While SimpleText prioritizes words over images, we recognize the power of strategic visual elements. Our gallery showcases examples of minimalist design that enhances rather than overshadows textual content.</p>
+                    
+                    <div class="img-container">
+                        <img src="/api/placeholder/600/400" alt="Minimalist website design example">
+                        <div class="img-caption">A clean, text-focused homepage design with strategic use of white space</div>
+                    </div>
+                    
+                    <h2>Typography Specimens</h2>
+                    <p>Typography is a crucial element in text-focused design. These examples showcase how different typefaces and text treatments can create distinct moods while maintaining readability.</p>
+                    
+                    <div class="img-container">
+                        <img src="/api/placeholder/600/300" alt="Typography specimens">
+                        <div class="img-caption">Various typography treatments for different content types</div>
+                    </div>
+                    
+                    <h2>Content Layouts</h2>
+                    <p>These examples demonstrate effective ways to structure content-heavy pages for optimal readability and engagement.</p>
+                    
+                    <div class="img-container">
+                        <img src="/api/placeholder/600/400" alt="Content layout examples">
+                        <div class="img-caption">Different approaches to organizing text-heavy content</div>
+                    </div>
+                    
+                    <h2>Interface Elements</h2>
+                    <p>Even in a text-focused design, interface elements play an important role in guiding users and facilitating interaction.</p>
+                    
+                    <div class="img-container">
+                        <img src="/api/placeholder/600/300" alt="Minimalist interface elements">
+                        <div class="img-caption">Clean, intuitive navigation and button designs</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ Page -->
+            <div class="page" id="faq">
+                <h1>Frequently Asked Questions</h1>
+                <div class="content-section">
+                    <div class="faq-item">
+                        <h2>Why focus on text instead of images?</h2>
+                        <p>While images are powerful, they're often overused in modern web design, sometimes at the expense of substance. Text is the primary vehicle for conveying information and is essential for accessibility. A text-focused approach ensures that your message is clear, searchable, and accessible to all users, including those using screen readers.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h2>Does a text-focused website mean no images at all?</h2>
+                        <p>Not at all. We believe in strategic use of images to complement and enhance text content. The key is ensuring that visuals serve a purpose rather than being used as decorative fillers. When we use images, we make sure they add value to the content and help tell your story.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h2>How do you ensure text-heavy sites remain engaging?</h2>
+                        <p>We use various techniques to enhance readability and engagement, including:</p>
+                        <ul>
+                            <li>Thoughtful typography and text hierarchy</li>
+                            <li>Strategic use of white space</li>
+                            <li>Careful formatting and chunking of content</li>
+                            <li>Accent colors and subtle visual cues</li>
+                            <li>Interactive elements that enhance rather than distract</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h2>Is a text-focused approach suitable for all types of websites?</h2>
+                        <p>While our approach works exceptionally well for content-rich websites like blogs, corporate sites, and educational platforms, we recognize that some industries may require more visual emphasis. However, even visually-oriented sites benefit from clear, well-structured text content. We tailor our approach to each client's specific needs and industry requirements.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h2>How does a text-focused approach impact SEO?</h2>
+                        <p>Text-focused websites often perform better in search engine rankings because search engines primarily index and analyze text content. By prioritizing well-written, keyword-rich content, we create sites that are naturally optimized for search engines. This means better visibility and more organic traffic for your website.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h2>What about mobile responsiveness?</h2>
+                        <p>All of our designs are fully responsive and optimized for various screen sizes and devices. Text-focused designs often adapt more seamlessly to different screen sizes compared to image-heavy layouts, resulting in a consistent experience across all devices.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Page -->
+            <div class="page" id="contact">
+                <h1>Contact Us</h1>
+                <div class="content-section">
+                    <p>We'd love to hear from you. Whether you have a question about our services, want to discuss a potential project, or just want to say hello, use the form below to get in touch.</p>
+                    
+                    <div class="contact-info">
+                        <h2>Get in Touch</h2>
+                        <p><strong>Email:</strong> hello@simpletext.example</p>
+                        <p><strong>Phone:</strong> (555) 123-4567</p>
+                        <p><strong>Address:</strong> 123 Content Way, Textville, TX 12345</p>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <h2>Send Us a Message</h2>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn">Send Message</button>
+                        </form>
+                    </div>
+                    
+                    <div class="text-accent">
+                        <p>We typically respond to all inquiries within 24-48 business hours.</p>
+                    </div>
+                    
+                    <h2>Office Hours</h2>
+                    <p>Monday - Friday: 9:00 AM - 5:00 PM EST</p>
+                    <p>Saturday - Sunday: Closed</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#" class="nav-link" data-page="home">Home</a>
+                    <a href="#" class="nav-link" data-page="about">About</a>
+                    <a href="#" class="nav-link" data-page="services">Services</a>
+                    <a href="#" class="nav-link" data-page="blog">Blog</a>
+                    <a href="#" class="nav-link" data-page="gallery">Gallery</a>
+                    <a href="#" class="nav-link" data-page="faq">FAQ</a>
+                    <a href="#" class="nav-link" data-page="contact">Contact</a>
+                </div>
+                <div class="copyright">
+                    &copy; 2025 SimpleText. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation functionality
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Get the page to show
+                    const pageId = this.getAttribute('data-page');
+                    
+                    // Hide all pages
+                    pages.forEach(page => {
+                        page.classList.remove('active');
+                    });
+                    
+                    // Show the selected page
+                    document.getElementById(pageId).classList.add('active');
+                    
+                    // Update active navigation link
+                    navLinks.forEach(navLink => {
+                        navLink.classList.remove('active');
+                    });
+                    
+                    // Set clicked link as active
+                    this.classList.add('active');
+                    
+                    // Scroll to top when changing pages
+                    window.scrollTo(0, 0);
+                });
+            });
+            
+            // Handle buttons that navigate to different pages
+            const pageButtons = document.querySelectorAll('.btn[data-page]');
+            pageButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const pageId = this.getAttribute('data-page');
+                    const targetNavLink = document.querySelector(`.nav-link[data-page="${pageId}"]`);
+                    
+                    if (targetNavLink) {
+                        targetNavLink.click();
+                    }
+                });
+            });
+            
+            // Form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // In a real site, you would handle form submission here
+                    // For demo purposes, we'll just show an alert
+                    alert('Thank you for your message! In a real implementation, this form would send your information to a server.');
+                    contactForm.reset();
+                });
+            }
+            
+            // Responsive features
+            function handleResponsiveLayout() {
+                const width = window.innerWidth;
+                // Add any specific responsive behavior here if needed
+            }
+            
+            // Initial call and event listener for resize
+            handleResponsiveLayout();
+            window.addEventListener('resize', handleResponsiveLayout);
+        });
+    </script>
+</body>
+</html>
